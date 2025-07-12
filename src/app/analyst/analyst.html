@@ -1,0 +1,208 @@
+<div class="row">
+  <div class="col-md-12 page-header">
+    <h2 class="page-title">ODD ANALYST</h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="content">
+        <div class="row">
+          <div class="col-md-12">
+            <h4 class="text-center">Odd of events</h4>
+          </div>
+          <hr>
+          <div class="col-12 row align-items-center">
+            <span class="col-2">
+              Search:
+              <i class="fa fa-refresh cursor-pointer"></i>
+            </span>
+            <div class="col-9 row justify-content-around">
+              @for (i of filter; track i; let idx = $index) {
+                <div class="col-3 border-start border-end">
+                  <div class="row align-items-center">
+                    <span class="col-3 text-end">{{ i.dislayType }} Odd</span>
+                    <input type="checkbox" [name]="i.type + '.line'+idx" class="col-3 align-self-center" [maxLength]="5"
+                           [(ngModel)]="i.isCompareOdd">
+                    <span class="col-3 text-end">Line</span>
+                    <input type="text" [name]="i.type + '.line'+idx" class="col-3" [maxLength]="5"
+                           [(ngModel)]="i.line">
+                  </div>
+                  @if (i.isCompareOdd) {
+                    <div class="row align-items-center mt-2">
+                      <span class="col-3 text-end">{{ i.type === 'hdc' ? 'home' : 'over' }}</span>
+                      <input type="text" [name]="i.type + 'odd1.'+idx" class=" col-3" maxlength="5"
+                             [(ngModel)]="i.odd1">
+
+                      <span class="col-3 text-end">{{ i.type === 'hdc' ? 'away' : 'under' }}</span>
+                      <input type="text" [name]="i.type + 'odd2.'+idx" class=" col-3" maxlength="5"
+                             [(ngModel)]="i.odd2">
+                    </div>
+                  }
+                </div>
+              }
+            </div>
+            <div class="col-1 align-self-end">
+              <button class="btn btn-primary" type="button" (click)="load()">Submit</button>
+            </div>
+          </div>
+          <hr>
+
+
+          <div class="canvas-wrapper mt-3">
+            <table class="table table-striped table-bordered table-list">
+              <thead class="success">
+              <tr>
+                <th class="text-left">Event</th>
+                <th class="text-left">League</th>
+                <th class="text-left">Odd</th>
+                <th class="text-left">Score</th>
+                <th class="text-left">Link</th>
+              </tr>
+              </thead>
+              <tbody>
+                @defer (prefetch when !loading) {
+                  <tr>
+                    <td colspan="99" class="text-center fw-bold table-info">
+                      Total events: {{ data.data.length | number:'1.0-0' }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="99" class="row-accent">
+                      <div class="d-flex">
+                        <ul class="m-0">
+                          <li> Home > Away:</li>
+                          <li> Away > Home:</li>
+                        </ul>
+                        <ul class="m-0">
+                          <li> Over > Under:</li>
+                          <li> Under > Over:</li>
+                        </ul>
+                        <ul class="m-0">
+                          <li>Over & Home:</li>
+                          <li>Over & Away:</li>
+
+                          <li>Under & Home:</li>
+                          <li>Under & Away:</li>
+                        </ul>
+                        <ul class="m-0">
+                          <li>Line & Odd:</li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                  @for (l of data.data; track l) {
+                    <tr class="row-hover">
+                      <td class="text-center">
+                        <div class="d-flex justify-content-between w-100">
+                          <span class="team-name fw-bold text-info fs-6 text-end">{{ l.homeTeam }}</span>
+                          <span class="vs text-center">vs</span>
+                          <span class="team-name fw-bold text-info fs-6 text-start">{{ l.awayTeam }}</span>
+                        </div>
+                        <p class="w-100 m-0">
+                          {{ l.eventDate | date: 'dd/MM/yyyy HH:mm z' : '+0700' }}
+                        </p>
+                      </td>
+                      <td class="text-left">{{ l.leagueName }}</td>
+                      <td>
+                        <div class="d-flex flex-column">
+                          @for (odd of l.odds; track odd; let end = $last) {
+                            @if (odd.line) {
+                              <div>
+                                <span class="text-capitalize">{{ odd.oddType }}: </span>
+                                <span class="text-kira-secondary fw-bold">{{ odd.line }}</span>
+                              </div>
+                              <div>
+                                <span class="text-capitalize">
+                                  {{ isHdc(odd) ? 'Home' : 'Over' }}:
+                                </span>
+                                <span class="text-kira-even fw-bold">
+                                  {{ (isHdc(odd) ? odd.homeLine : '') | number:'1.2-2' }} {{ odd.odd1 | number:'1.2-2' }}
+                                </span>
+                                <span class="text-capitalize ms-3">
+                                  {{ isHdc(odd) ? 'Away' : 'Under' }}:
+                                </span>
+                                <span class="text-kira-even fw-bold">
+                                  {{ (isHdc(odd) ? odd.awayLine : '') | number:'1.2-2' }} {{ odd.odd2 | number:'1.2-2' }}
+                                </span>
+                              </div>
+                              @if (!end) {
+                                <hr class="my-1">
+                              }
+                            }
+                          }
+                        </div>
+                      </td>
+                      <td class="text-left">
+                        <div class="d-flex flex-column">
+                          <span>{{ l.htScoreStr.replace('HT', 'HT: ').replace('-', ' - ') }}</span>
+                          <span>FT: {{ l.ftScoreStr }}</span>
+                          <span>Corner: {{ l.cornerStr }}</span>
+                        </div>
+                      </td>
+                      <td class="text-left">
+                        <a class="text-decoration-none" href="javascript:void(0)"
+                           (click)="openPopup(l.link, l.homeTeam + l.awayTeam)">
+                          <i class="fas fa-link"></i>
+                        </a>
+                      </td>
+                    </tr>
+                    <tr class="row-odd-movement">
+                      <td colspan="99">
+                        <ul class="d-flex flex-column">
+                          <li [innerHtml]="'Home: ' + l.homeLineHdcMovement"></li>
+                          <li [innerHtml]="'Away: ' + l.awayLineHdcMovement"></li>
+                          <li [innerHtml]="'Over: ' + l.overLineMovement"></li>
+                          <li [innerHtml]="'Under: ' + l.underLineMovement"></li>
+                        </ul>
+                        <div class="d-flex">
+                          <ul class="m-0">
+                            <li>Home:
+                              <span class="text-success">{{ l.firstHomeOdds }}</span>
+                              <span class="text-danger ms-2">{{ l.lastHomeOdds }}</span>
+                            </li>
+                            <li>Away:
+                              <span class="text-success">{{ l.firstAwayOdds }}</span>
+                              <span class="text-danger ms-2">{{ l.lastAwayOdds }}</span>
+                            </li>
+                            <li>Over:
+                              <span class="text-success">{{ l.firstOverOdds }}</span>
+                              <span class="text-danger ms-2">{{ l.lastOverOdds }}</span>
+                            </li>
+                            <li>Under:
+                              <span class="text-success">{{ l.firstUnderOdds }}</span>
+                              <span class="text-danger ms-2">{{ l.lastUnderOdds }}</span>
+                            </li>
+                          </ul>
+                          <ul class="m-0">
+                            <li>HDC:
+                              <span class="text-success">{{ l.firstHdc }}</span>
+                              <span class="text-danger ms-2">{{ l.lastHdc }}</span>
+                            </li>
+                            <li>OU:
+                              <span class="text-success">{{ l.firstOu }}</span>
+                              <span class="text-danger ms-2">{{ l.lastOu }}</span>
+                            </li>
+                          </ul>
+                        </div>
+                      </td>
+                    </tr>
+                  } @empty {
+                    <tr>
+                      <td colspan="99" class="text-center">No events found.</td>
+                    </tr>
+                  }
+                } @placeholder {
+                  <tr>
+                    <td colspan="99" class="text-center">⏳ Đang tải dữ liệu trận đấu...</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

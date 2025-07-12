@@ -1,0 +1,29 @@
+.table-list {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  font-size: 14px;
+
+  thead tr th,
+  tbody tr td {
+    &:nth-child(1) {
+      width: 40%;
+    }
+
+    &:nth-child(2) {
+      width: 20%;
+    }
+
+    &:nth-child(3) {
+      width: 20%;
+    }
+
+    &:nth-child(4) {
+      width: 15%;
+    }
+
+    &:nth-child(5) {
+      width: 5%;
+    }
+  }
+}

@@ -1,8 +1,102 @@
 /* You can add global styles to this file, and also import other style files */
-@import "bootstrap/dist/css/bootstrap";
 @import "fontawesome.min.css";
 @import "solid.min.css";
 @import "brands.min.css";
+@import "bootstrap.min.css";
+
+:root {
+  --main-bg-color: #0b1727;
+  --text-primary: #ffffff;
+  --text-secondary: #b2ebf2;
+  --text-muted: #7b8794;
+  --text-accent: #5dbdec;
+  --text-odd: #f1eaff;
+  --text-even: #c9b8f9;
+  --text-highlight: #8e8aa8;
+  --text-highlight-bg: #ff8e3c;
+  --main-bg-odd: #202e4f;
+  --main-fg-odd: #ffffff;
+}
+
+.bg-main {
+  background: var(--main-bg-color);
+}
+
+.bg-kira-primary {
+  background: var(--text-primary);
+}
+
+.bg-kira-secondary {
+  background: var(--text-secondary);
+}
+
+.bg-kira-muted {
+  background: var(--text-muted);
+}
+
+.bg-kira-accent {
+  background: var(--text-accent);
+}
+
+.bg-kira-odd {
+  background: var(--text-odd);
+}
+
+.bg-kira-even {
+  background: var(--text-even);
+}
+
+.bg-kira-highlight {
+  background: var(--text-highlight);
+}
+
+.bg-kira-highlight-bg {
+  background: var(--text-highlight-bg);
+}
+
+.bg-kira-bg-odd {
+  background: var(--main-bg-odd);
+}
+
+.bg-kira-fg-odd {
+  background: var(--main-fg-odd);
+}
+
+.text-main {
+  color: var(--main-bg-color);
+}
+
+.text-kira-primary {
+  color: var(--text-primary);
+}
+
+.text-kira-secondary {
+  color: var(--text-secondary);
+}
+
+.text-kira-muted {
+  color: var(--text-muted);
+}
+
+.text-kira-accent {
+  color: var(--text-accent);
+}
+
+.text-kira-odd {
+  color: var(--text-odd);
+}
+
+.text-kira-even {
+  color: var(--text-even);
+}
+
+.text-kira-highlight {
+  color: var(--text-highlight);
+}
+
+.text-kira-highlight-bg {
+  color: var(--text-highlight-bg);
+}
 
 .nav-dropdown .nav-link {
   color: #B2EBF2;
@@ -45,7 +139,7 @@
   transform: rotate(45deg);
   width: .5em;
   height: .5em;
-  background: #ffffff;
+  background: var(--main-bg-color);
   z-index: 2;
 }
 
@@ -60,9 +154,10 @@
 }
 
 .nav-dropdown .nav-link-menu .nav-list li a {
-  color: #888;
+  color: #888 !important;
   font-size: 14px;
   padding: .8rem;
+  text-underline: none !important;
 }
 
 .nav-dropdown .dropdown-divider {
@@ -70,10 +165,10 @@
 }
 
 #sidebar {
-  min-width: 250px;
-  max-width: 250px;
-  background: #fff;
-  color: #fff;
+  min-width: 170px;
+  max-width: 170px;
+  background: var(--main-bg-color);
+  color: #ffffff;
   transition: all 0.3s;
   border-right: 1px solid #e6ecf5;
 }
@@ -122,7 +217,7 @@ a[aria-expanded="true"] {
 
 #sidebar ul ul a {
   font-size: 1rem;
-  background: #EEEEEE;
+  background: var(--main-bg-color);;
 }
 
 #sidebar a[data-toggle="collapse"] {
@@ -175,10 +270,10 @@ td {
 body {
   width: 100%;
   height: 100%;
-  background: #f3f3f5;
+  background: var(--main-bg-color);
   font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif;
-  font-size: 1rem;
-  color: #444;
+  font-size: 14px;
+  color: #fff;
 }
 
 .wrapper {
@@ -264,7 +359,8 @@ body {
 .box {
   position: relative;
   border-radius: 3px;
-  background: #ffffff;
+  background: var(--main-bg-color);
+  color: white;
   border-top: 3px solid #d2d6de;
   margin-bottom: 20px;
   width: 100%;
@@ -286,7 +382,8 @@ body {
   border-bottom-left-radius: 3px;
   border-top: 1px solid #f4f4f4;
   padding: 10px 20px;
-  background-color: #FAFAFA;
+  background-color: var(--main-bg-color);
+  color: #fff;
   text-align: right;
 }
 
@@ -302,17 +399,21 @@ body {
   border: 1px solid #eaedf1;
   margin-bottom: 1.5rem;
   border-radius: 5.2px;
+  background: var(--main-bg-color);
+  color: white;
   overflow: hidden;
 }
 
 .card-header {
   padding: 15px 20px;
-  background-color: #fff;
+  background-color: var(--main-bg-color);
+  color: white;
   border-bottom: 1px solid #e7eaf3;
 }
 
 .card-footer {
-  background-color: #fff;
+  background-color: var(--main-bg-color);
+  color: white;
   border-top: 1px solid #e7eaf3;
 }
 
@@ -353,7 +454,7 @@ body {
 
 .nav-pills {
   padding: 15px;
-  background-color: #E0E0E0;
+  background-color: var(--main-bg-color);
   -webkit-box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.05);
   box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.05);
 }
@@ -364,7 +465,7 @@ body {
   font-size: small;
   text-transform: none;
   text-shadow: none !important;
-  background: #eaeaea;
+  background: var(--main-bg-color);
   border-color: transparent;
   border: none;
   line-height: 1.2rem;
@@ -388,7 +489,7 @@ body {
 }
 
 .bg-lighter-grey {
-  background: #FAFAFA;
+  background: var(--main-bg-color);
 }
 
 /*------------------------------------------------------------------
@@ -411,6 +512,13 @@ a:focus {
   border-radius: 0;
 }
 
+.table {
+  --bs-table-bg: var(--main-bg-color);
+  --bs-table-color: white;
+  --bs-table-striped-color: white;
+  color: white;
+}
+
 .table td,
 .table th {
   vertical-align: middle;
@@ -426,7 +534,7 @@ table.dataTable thead .sorting_asc_disabled:before,
 table.dataTable thead .sorting_asc_disabled:after,
 table.dataTable thead .sorting_desc_disabled:before,
 table.dataTable thead .sorting_desc_disabled:after {
-  font-size: .8rem;
+  font-size: .5rem;
   bottom: .9rem;
 }
 
@@ -893,3 +1001,88 @@ table.dataTable > tbody > tr.child ul.dtr-details {
     flex-direction: row;
   }
 }
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.gradient-text {
+  font-weight: bold;
+  animation: animatedGradient 3s ease infinite;
+}
+
+@keyframes animatedGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.row-hover:hover {
+  --bs-table-color: #cff4fc;
+  --bs-table-bg: #3266e7;
+  --bs-table-border-color: #3266e7;
+
+  --bs-table-striped-bg: #3266e7;
+  --bs-table-striped-color: #ffffff;
+
+  --bs-table-active-bg: #3266e7;
+  --bs-table-active-color: #ffffff;
+
+  --bs-table-hover-bg: #3266e7;
+  --bs-table-hover-color: #ffffff;
+  cursor: pointer;
+}
+
+.row-odd-movement {
+  --text-row-odd: var(--main-fg-odd);
+  --bg-row-odd: var(--main-bg-odd);
+
+  --bs-table-color: var(--text-row-odd);
+  --bs-table-bg: var(--bg-row-odd);
+  --bs-table-border-color: var(--bg-row-odd);
+
+  --bs-table-striped-bg: var(--bg-row-odd);
+  --bs-table-striped-color: var(--text-row-odd);
+
+  --bs-table-active-bg: var(--bg-row-odd);
+  --bs-table-active-color: var(--text-row-odd);
+
+  --bs-table-hover-bg: var(--bg-row-odd);
+  --bs-table-hover-color: var(--text-row-odd);
+  cursor: pointer;
+}
+
+.row-accent {
+  --text-row-accent: var(--main-bg-color);
+  --bg-row-accent: var(--text-accent);
+
+  --bs-table-color: var(--text-row-accent);
+  --bs-table-bg: var(--bg-row-accent);
+  --bs-table-border-color: var(--bg-row-accent);
+
+  --bs-table-striped-bg: var(--bg-row-accent);
+  --bs-table-striped-color: var(--text-row-accent);
+
+  --bs-table-active-bg: var(--bg-row-accent);
+  --bs-table-active-color: var(--text-row-accent);
+
+  --bs-table-hover-bg: var(--bg-row-accent);
+  --bs-table-hover-color: var(--text-row-accent);
+  cursor: pointer;
+}
+
+
+.team-name {
+  width: 40%;
+}
+
+.vs {
+  width: 10%;
+}
+
