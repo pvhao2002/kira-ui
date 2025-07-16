@@ -14,6 +14,7 @@ export class App implements OnInit {
     {label: 'League', link: '/league', icon: 'fas fa-trophy'},
     {label: 'Event', link: '/event', icon: 'fas fa-calendar-alt'},
     {label: 'Analyst', link: '/analyst', icon: 'fas fa-chart-line'},
+    {label: 'Today', link: '/today-event', icon: 'fas fa-calendar'},
   ];
 
   constructor(protected router: Router) {

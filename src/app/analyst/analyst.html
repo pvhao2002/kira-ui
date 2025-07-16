@@ -20,23 +20,26 @@
             </span>
             <div class="col-9 row justify-content-around">
               @for (i of filter; track i; let idx = $index) {
-                <div class="col-3 border-start border-end">
+                <div class="col-6 border-start border-end">
                   <div class="row align-items-center">
-                    <span class="col-3 text-end">{{ i.dislayType }} Odd</span>
-                    <input type="checkbox" [name]="i.type + '.line'+idx" class="col-3 align-self-center" [maxLength]="5"
+                    <span class="col-2 text-end">{{ i.dislayType }}</span>
+                    <input type="checkbox" [name]="i.type + '.line'+idx" class="d-none col-2 align-self-center" [maxLength]="5"
                            [(ngModel)]="i.isCompareOdd">
-                    <span class="col-3 text-end">Line</span>
-                    <input type="text" [name]="i.type + '.line'+idx" class="col-3" [maxLength]="5"
-                           [(ngModel)]="i.line">
+                    <span class="col-2 text-end">F Line</span>
+                    <input type="text" [name]="i.type + '.fline'+idx" class="col-2" [maxLength]="20"
+                           [(ngModel)]="i.firstLine">
+                    <span class="col-2 text-end">L Line</span>
+                    <input type="text" [name]="i.type + '.lline'+idx" class="col-2" [maxLength]="20"
+                           [(ngModel)]="i.lastLine">
                   </div>
                   @if (i.isCompareOdd) {
                     <div class="row align-items-center mt-2">
                       <span class="col-3 text-end">{{ i.type === 'hdc' ? 'home' : 'over' }}</span>
-                      <input type="text" [name]="i.type + 'odd1.'+idx" class=" col-3" maxlength="5"
+                      <input type="text" [name]="i.type + 'odd1.'+idx" class=" col-3" maxlength="20"
                              [(ngModel)]="i.odd1">
 
                       <span class="col-3 text-end">{{ i.type === 'hdc' ? 'away' : 'under' }}</span>
-                      <input type="text" [name]="i.type + 'odd2.'+idx" class=" col-3" maxlength="5"
+                      <input type="text" [name]="i.type + 'odd2.'+idx" class=" col-3" maxlength="20"
                              [(ngModel)]="i.odd2">
                     </div>
                   }
@@ -71,24 +74,35 @@
                   <tr>
                     <td colspan="99" class="row-accent">
                       <div class="d-flex">
-                        <ul class="m-0">
-                          <li> Home > Away:</li>
-                          <li> Away > Home:</li>
-                        </ul>
-                        <ul class="m-0">
-                          <li> Over > Under:</li>
-                          <li> Under > Over:</li>
-                        </ul>
-                        <ul class="m-0">
-                          <li>Over & Home:</li>
-                          <li>Over & Away:</li>
+                        <div class="w-25 row">
+                          <ul class="m-0 col-6">
+                            <li> Home > Away: {{ data.summary?.homeGreaterAway }}</li>
+                            <li> Away > Home: {{ data.summary?.awayGreaterHome }}</li>
+                          </ul>
+                          <ul class="m-0 col-6">
+                            <li> Over > Under: {{ data.summary?.overGreaterUnder }}</li>
+                            <li> Under > Over: {{ data.summary?.underGreaterOver }}</li>
+                          </ul>
+                          <ul class="m-0 col-6">
+                            <li>Home & Over: {{ data.summary?.homeAndOverGreater }}</li>
+                            <li>Away & Over: {{ data.summary?.awayAndOverGreater }}</li>
 
-                          <li>Under & Home:</li>
-                          <li>Under & Away:</li>
-                        </ul>
-                        <ul class="m-0">
-                          <li>Line & Odd:</li>
-                        </ul>
+                            <li>Home & Under: {{ data.summary?.homeAndUnderGreater }}</li>
+                            <li>Away & Under: {{ data.summary?.awayAndUnderGreater }}</li>
+                          </ul>
+                          <ul class="m-0 col-6">
+                            <li>Line & Odd: {{ data.summary?.lineAndOddSame }}</li>
+                          </ul>
+                          <hr class="my-1 border-info">
+                        </div>
+                        <div class="row ms-3 w-75">
+                          @for (score of data.scoreSummary; track score) {
+                            <p class="col-2 text-odd m-2 p-0 border-bottom border-secondary d-flex flex-column">
+                              <span>FT: {{ score.score }}: [{{ score.cnt }}]</span>
+                              <span style="font-size: 12px;">{{ score.regularOdd }}</span>
+                            </p>
+                          }
+                        </div>
                       </div>
                     </td>
                   </tr>

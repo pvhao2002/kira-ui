@@ -24,6 +24,10 @@ export const routes: Routes = [
       {
         path: 'analyst',
         loadComponent: () => import('./analyst/analyst').then((mod) => mod.Analyst),
+      },
+      {
+        path: 'today-event',
+        loadComponent: () => import('./today-event/today-event').then((mod) => mod.TodayEvent),
       }
     ]
   },

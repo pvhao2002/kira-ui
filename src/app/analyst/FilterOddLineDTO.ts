@@ -3,6 +3,8 @@ export class FilterOddLineDTO {
     public dislayType: string = '',
     public type: string = '',
     public line: string = '',
+    public firstLine: string = '',
+    public lastLine: string = '',
     public odd1: number = 0,
     public odd2: number = 0,
     public isCompareOdd: boolean = false,

@@ -27,3 +27,16 @@
     }
   }
 }
+
+.text-odd:hover {
+  background: #0a53be;
+  color: white;
+}
+
+.w-35 {
+  width: 35%;
+}
+
+.w-65 {
+  width: 60%;
+}

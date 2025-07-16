@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {DatePipe, DecimalPipe} from '@angular/common';
 import {EventOddDTO, FilterOddLineDTO, OddLineDTO} from './FilterOddLineDTO';
-import {openPopup} from '../function/GlobalFunction';
+import {convertToAsianFormat, openPopup} from '../function/GlobalFunction';
 import {ResponsePaging} from '../model/ResponsePaging';
 
 @Component({
@@ -35,10 +35,8 @@ export class Analyst implements OnInit {
   load(): void {
     const params = this.filter.map(f => ({
       type: f.type,
-      line: f.line,
-      odd1: f.odd1,
-      odd2: f.odd2,
-      isCompareOdd: f.isCompareOdd,
+      firstLine: f.firstLine,
+      lastLine: f.lastLine,
     }));
     this.loading = true;
     this.http.post<ResponsePaging<EventOddDTO>>('api/events/filter-odd', params)
