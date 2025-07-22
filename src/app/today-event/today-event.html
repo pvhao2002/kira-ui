@@ -14,51 +14,35 @@
           </div>
           <hr>
 
-          <div class="canvas-wrapper mt-3">
-            <accordion>
-              @for (e of data; track e) {
-                <accordion-group>
-                  <button class="btn text-white justify-content-between d-flex w-100  shadow-none" accordion-heading
-                          type="button">
-                    <div class="pull-left float-left">
-                      <span class="fw-bold">{{ e.homeTeam }} vs {{ e.awayTeam }}</span>
-                      <span class="ms-4">{{ e.leagueName }}</span>
-                      <small class="ms-4">{{ e.eventDate |date: 'dd-MM-yyyy HH:mm z' : '+0700' }}</small>
-                    </div>
-                  </button>
-                  <pre>
-                    🏆 [Tên giải đấu]
-                    🕘 Kick-off: [Giờ bắt đầu] – [Thứ, ngày tháng năm]
-
-                    🔷 Match: [Đội chủ nhà] vs [Đội khách]
-
-                    📊 Handicap (HDC):
-                    - [Đội chủ nhà] [kèo chấp]  [odd]
-                    - [Đội khách] [kèo được chấp]  [odd]
-
-                    📊 Over/Under (O/U):
-                    - Over [mốc tài xỉu]  [odd]
-                    - Under [mốc tài xỉu]  [odd]
-
-                    📊 Corners Line:
-                    - Over [mốc phạt góc]  [odd]
-                    - Under [mốc phạt góc]  [odd]
-
-                    📉 Head-to-Head (H2H):
-                    - Gần nhất: [Tỉ số, đội nhà - đội khách]
-                    - Các lần gặp khác (nếu có): [liệt kê tỉ số]
-
-                    📈 Form gần đây:
-                    - [Đội chủ nhà]: [W/D/L – Tỉ số]
-                    - [Đội khách]: [W/D/L – Tỉ số]
-                  </pre>
-                </accordion-group>
-              } @empty {
-                <div class="text-center">
-                  <h4>No events for today</h4>
-                </div>
-              }
-            </accordion>
+          <div class="canvas-wrapper">
+            <table class="table table-striped table-bordered table-list">
+              <thead class="success">
+              <tr>
+                <th class="text-center">Event</th>
+                <th class="text-left">Current Odd</th>
+                <th class="text-center">System</th>
+                <th class="text-center">AI</th>
+                <th></th>
+              </tr>
+              </thead>
+              <tbody>
+                @for (l of data; track l) {
+                  <tr class="row-hover">
+                    <td><i class="flag-icon flag-icon-us"></i></td>
+                    <td class="text-left">{{ l.leagueName }}</td>
+                    <td class="text-center">asdasda
+                    </td>
+                    <td class="text-center">
+                    </td>
+                    <td></td>
+                  </tr>
+                } @empty {
+                  <tr>
+                    <td colspan="99" class="text-center">No events found.</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

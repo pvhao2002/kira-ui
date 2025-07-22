@@ -28,6 +28,10 @@ export const routes: Routes = [
       {
         path: 'today-event',
         loadComponent: () => import('./today-event/today-event').then((mod) => mod.TodayEvent),
+      },
+      {
+        path: 'logs',
+        loadComponent: () => import('./logs/logs').then((mod) => mod.Logs),
       }
     ]
   },
