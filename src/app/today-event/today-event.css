@@ -2,12 +2,11 @@
   width: 100%;
   border-collapse: collapse;
   background: white;
-  font-size: 12px;
+  font-size: 13px;
 
-  thead tr th,
   tbody tr td {
     &:nth-child(1) {
-      width: 30%;
+      width: 5%;
     }
 
     &:nth-child(2) {
@@ -15,15 +14,34 @@
     }
 
     &:nth-child(3) {
-      width: 17.5%;
+      width: 20%;
     }
 
     &:nth-child(4) {
-      width: 17.5%;
+      width: 20%;
     }
 
     &:nth-child(5) {
+      width: 20%;
+    }
+
+    &:nth-child(6) {
       width: 5%;
     }
   }
+}
+
+.table-info {
+  --bg: #2e98ea;
+  --bs-table-color: #000;
+  --bs-table-bg: var(--bg);
+  --bs-table-border-color: #a6c3ca;
+  --bs-table-striped-bg: var(--bg);
+  --bs-table-striped-color: #000;
+  --bs-table-active-bg: var(--bg);
+  --bs-table-active-color: #000;
+  --bs-table-hover-bg: var(--bg);
+  --bs-table-hover-color: #000;
+  color: #003366 !important; /* chữ đậm hơn để dễ đọc */
+  font-weight: bold;
 }

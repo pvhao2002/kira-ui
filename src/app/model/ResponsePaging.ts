@@ -27,8 +27,12 @@ export interface TeamAnalystDetail {
 export interface SummaryOddEventAnalyst {
   homeGreaterAway?: number;
   awayGreaterHome?: number;
+  homeEqualAway?: number;
+
   overGreaterUnder?: number;
   underGreaterOver?: number;
+  overEqualUnder?: number;
+
   homeAndOverGreater?: number;
   homeAndUnderGreater?: number;
   awayAndOverGreater?: number;
@@ -42,4 +46,14 @@ export interface ScoreSummary {
   regularOdd?: string;
   minOdd?: string;
   maxOdd?: string;
+
+  h2a?: string;
+  o2u?: string;
+
+  h2aOdd?: string;
+  o2uOdd?: string;
+
+  highlightH2A?: boolean;
+  highlightO2U?: boolean;
+  highlight?: boolean;
 }

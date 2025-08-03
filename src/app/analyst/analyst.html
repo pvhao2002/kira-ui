@@ -23,7 +23,8 @@
                 <div class="col-6 border-start border-end">
                   <div class="row align-items-center">
                     <span class="col-2 text-end">{{ i.dislayType }}</span>
-                    <input type="checkbox" [name]="i.type + '.line'+idx" class="d-none col-2 align-self-center" [maxLength]="5"
+                    <input type="checkbox" [name]="i.type + '.line'+idx" class="d-none col-2 align-self-center"
+                           [maxLength]="5"
                            [(ngModel)]="i.isCompareOdd">
                     <span class="col-2 text-end">F Line</span>
                     <input type="text" [name]="i.type + '.fline'+idx" class="col-2" [maxLength]="20"
@@ -65,7 +66,11 @@
               </tr>
               </thead>
               <tbody>
-                @defer (prefetch when !loading) {
+                @if (loading) {
+                  <tr>
+                    <td colspan="99" class="text-center">⏳ Đang tải dữ liệu trận đấu...</td>
+                  </tr>
+                } @else {
                   <tr>
                     <td colspan="99" class="text-center fw-bold table-info">
                       Total events: {{ data.data.length | number:'1.0-0' }}
@@ -76,12 +81,32 @@
                       <div class="d-flex">
                         <div class="w-25 row">
                           <ul class="m-0 col-6">
-                            <li> Home > Away: {{ data.summary?.homeGreaterAway }}</li>
-                            <li> Away > Home: {{ data.summary?.awayGreaterHome }}</li>
+                            <li [ngClass]="{'text-bg-primary': flagHighlight.hdc === 'H'}"
+                                (click)="highlightHdc('H')">
+                              Home > Away: {{ data.summary?.homeGreaterAway }}
+                            </li>
+                            <li [ngClass]="{'text-bg-primary': flagHighlight.hdc === 'A'}"
+                                (click)="highlightHdc('A')">
+                              Away > Home: {{ data.summary?.awayGreaterHome }}
+                            </li>
+                            <li [ngClass]="{'text-bg-primary': flagHighlight.hdc === '='}"
+                                (click)="highlightHdc('=')">
+                              Home = Away: {{ data.summary?.homeEqualAway }}
+                            </li>
                           </ul>
                           <ul class="m-0 col-6">
-                            <li> Over > Under: {{ data.summary?.overGreaterUnder }}</li>
-                            <li> Under > Over: {{ data.summary?.underGreaterOver }}</li>
+                            <li [ngClass]="{'text-bg-success': flagHighlight.ou === 'O'}"
+                                (click)="highlightOu('O')">
+                              Over > Under: {{ data.summary?.overGreaterUnder }}
+                            </li>
+                            <li [ngClass]="{'text-bg-success': flagHighlight.ou === 'U'}"
+                                (click)="highlightOu('U')">
+                              Under > Over: {{ data.summary?.underGreaterOver }}
+                            </li>
+                            <li [ngClass]="{'text-bg-success': flagHighlight.ou === '='}"
+                                (click)="highlightOu('=')">
+                              Over = Under: {{ data.summary?.overEqualUnder }}
+                            </li>
                           </ul>
                           <ul class="m-0 col-6">
                             <li>Home & Over: {{ data.summary?.homeAndOverGreater }}</li>
@@ -98,8 +123,11 @@
                         <div class="row ms-3 w-75">
                           @for (score of data.scoreSummary; track score) {
                             <p class="col-2 text-odd m-2 p-0 border-bottom border-secondary d-flex flex-column">
-                              <span>FT: {{ score.score }}: [{{ score.cnt }}]</span>
-                              <span style="font-size: 12px;">{{ score.regularOdd }}</span>
+                              <span [ngClass]="{'text-danger': score.highlight}">FT: {{ score.score }}: [{{ score.cnt }}]</span>
+                              <span style="font-size: 12px;">
+                                <span [ngClass]="{'text-primary fw-bold': score.highlightH2A}">{{ score.h2aOdd }} / </span>
+                                <span [ngClass]="{'text-success fw-bold': score.highlightO2U}">{{ score.o2uOdd }}</span>
+                              </span>
                             </p>
                           }
                         </div>
@@ -207,10 +235,6 @@
                       <td colspan="99" class="text-center">No events found.</td>
                     </tr>
                   }
-                } @placeholder {
-                  <tr>
-                    <td colspan="99" class="text-center">⏳ Đang tải dữ liệu trận đấu...</td>
-                  </tr>
                 }
               </tbody>
             </table>

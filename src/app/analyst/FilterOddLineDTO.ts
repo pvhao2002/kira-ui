@@ -2,9 +2,9 @@ export class FilterOddLineDTO {
   public constructor(
     public dislayType: string = '',
     public type: string = '',
-    public line: string = '',
     public firstLine: string = '',
     public lastLine: string = '',
+    public line: string = '',
     public odd1: number = 0,
     public odd2: number = 0,
     public isCompareOdd: boolean = false,
